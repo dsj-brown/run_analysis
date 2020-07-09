@@ -1,10 +1,40 @@
 ## -------------------------------------------------------------
-## importData()
+## FUNCTION: run_analysis()
+## Function which runs the following scripts, outlined below
+## 1. importData()
+## 2. mergeData()
+## 3. totalData()
+## The product of which is a tidy data set called dTotals
+##
+## PRE-REQUISITES:
+## 1. Folder 'UCI HAR Dataset' must be a peer of the project folder
+## 2. Please ensure the following libraries are loaded:
+##      library(data.table)
+##      library(dplyr)
+##
+## Pass argument writeFile = TRUE if you'd like to generate a
+## .txt file containing the contents of the data set
+## -------------------------------------------------------------
+
+run_analysis <- function(writeFile = FALSE){
+        importData()
+        mergeData()
+        totalData()
+
+        # Print the file if instructed
+        if (writeFile == TRUE) {
+                write.table(dTotals, file = "dTotals.txt", row.name = FALSE)
+                message(paste("File 'dTotals.txt' written to", getwd()))
+        }
+}
+
+## -------------------------------------------------------------
+## FUNCTION: importData()
 ## Function to import run analysis data
-## Folder 'UCI HAR Dataset' must be a peer of the project folder
 ## -------------------------------------------------------------
 
 importData <- function() {
+
         # Remember current working directory (project folder)
         vWd = getwd()
         # Skip up a level
@@ -16,42 +46,123 @@ importData <- function() {
         # in the global environment
         dTest <<- read.table("test/X_test.txt", header = FALSE, dec = ".", 
                             comment.char = "", colClasses = "numeric")
+
+        # Read in the test activity labels and assign to an object 
+        # in the global environment        
+        aTest <<- read.table("test/y_test.txt", header = FALSE, 
+                             comment.char = "")
         
         # Read in the train dataset and assign to an object 
         # in the global environment        
         dTrain <<- read.table("train/X_train.txt", header = FALSE, dec = ".", 
                             comment.char = "", colClasses = "numeric")
         
+        # Read in the train activity labels and assign to an object 
+        # in the global environment
+        aTrain <<- read.table("train/y_train.txt", header = FALSE, 
+                              comment.char = "")
+        
         # Read in the variable labels and assign to an object 
         # in the global environment
         dLabels <<- read.table("features.txt", header = FALSE, comment.char = "")
 
+        # Read in the activity names and assign to an object 
+        # in the global environment
+        dActs <<- read.table("activity_labels.txt", header = FALSE, comment.char = "")
+        
         # Revert working directory to the project folder
         setwd(vWd)
 
 }
 
-## --------------------------------------------
-## mergeData()
+## -------------------------------------------------------------
+## FUNCTION: mergeData()
 ## Function to merge the training and test sets 
 ## to create one data set
-## --------------------------------------------
+## Ensure the dplyr library has been loaded before executing
+## -------------------------------------------------------------
 
 mergeData <- function() {
         
+        # Turn off warnings
+        oldw <- getOption("warn")
+        options(warn = -1)
+        
+        # Incorporate the activity labels
+        dTest <- cbind(aTest, dTest)
+        dTrain <- cbind(aTrain, dTrain)
+        
         ## Join the two tables
         dAllData <- rbind(dTest, dTrain)
-        ## Add variable labels using the dLabels object
-        names(dAllData) = dLabels[ ,2]
+        
+        ## Combine a list of field labels and add to combined dataset
+        vNames <- c("actId", dLabels[ ,2])
+        names(dAllData) = vNames
+        
+        # Prepare the activity labels
+        dActs <- rename(dActs, actId = V1, activityName = V2)
+        # Merge the activity name in
+        dAllData <- merge(dAllData, dActs, by.x = "actId", 
+                        by.y = "actId", all = TRUE)
+        
+        # Define the subset of field names that we care about
+        fList <- grep("[Mm]ean|std", names(dAllData), value = TRUE)
+        fList <- c("activityName", fList)
+        
+        # Then select only the fields that we need
+        dSelData <- select(dAllData, fList)
+        
         ## Return the results to the global environment 
-        dCombine <<- dAllData
+        dCombine <<- dSelData
+        
         # Tidy up the global objects that were used in this function
         rm(dTest, envir = .GlobalEnv)
         rm(dTrain, envir = .GlobalEnv)      
-        rm(dLabels, envir = .GlobalEnv)  
+        rm(dLabels, envir = .GlobalEnv)
+        rm(dActs, envir = .GlobalEnv)
+        rm(aTest, envir = .GlobalEnv)
+        rm(aTrain, envir = .GlobalEnv)
+
+        # Turn warnings back on
+        options(warn = oldw)
 
 }
 
-# Set labels on the test and train datasets
-names(dTest) = dLabels[ ,2]
-names(dTrain) = dLabels[ ,2]
+## -------------------------------------------------------------
+## FUNCTION: totalData()
+## Function to produce a tidy data set which contains
+## mean values for all variables in dCombine, by activity type.
+## After grouping there are more variables than there are 
+## activities, so the data set is transposed to produce a 
+## tall and thin data set.
+## Ensure the data.table library is loaded before executing.
+## -------------------------------------------------------------
+
+totalData <- function(){
+        
+        # Group the dCombine dataset by activityName
+        grpData <- dCombine %>% 
+                group_by(activityName)
+        
+        # Get a data frame containing the mean per group
+        meanData <- aggregate(grpData[,2:ncol(grpData)], 
+                              list(grpData$activityName), mean)
+        
+        # Flip so it's tall and thin as opposed to short and fat
+        tallData <- data.frame(t(meanData[-1]))
+        colnames(tallData) <- meanData[, 1]
+        
+        # Convert row labels to row names
+        tallData <- setDT(tallData, keep.rownames = TRUE)[]
+        
+        # and add a descriptive column name
+        tallData <- tallData %>%
+                        rename(signalMeasure = rn)
+        
+        # Assign the result to a global variable
+        dTotals <<- tallData
+        
+        # Dispose of the dCombine data frame
+        rm(dCombine, envir = .GlobalEnv)
+        
+}
