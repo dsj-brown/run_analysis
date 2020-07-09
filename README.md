@@ -3,11 +3,9 @@ Data Science, Getting and Cleaning Data Week 4 Assignment
 
 This ReadMe contains descriptions of the how all the scripts work and how they are connected.
 
-## Scripts
 ### Pre-requisites
 This code is designed to tidy a set of files in the folder 'UCI HAR Dataset' supplied as part of the assignment.
 See: <https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip>
-[link](HCI Dataset)
 
 If you would like to re-run this script then please ensure the file is saved in a location adjacent to this project (i.e. as a peer in the folder structure, not above or below).
 
@@ -15,9 +13,11 @@ Please ensure the following libraries are loaded before running:
 1. data.table
 2. dplyr
 
+## Scripts
+
 ### run_analysis(writeFile = FALSE)
 A function which executes a series of nested functions and results in a tidy data set being returned to the global environment.
-If you would like to write the contents of the data set into a .txt file contained in the project folder then pass the a writeFile value of TRUE when executing the function. 
+If you would like to write the contents of the data set into a .txt file, contained in the project folder, then specify the argument writeFile = TRUE when executing the function. 
 
 The function calls the following functions in order:
 1. importData()
@@ -26,7 +26,7 @@ The function calls the following functions in order:
 
 ### importData()
 A function to import the relevant files from your working directory.  
-It assumes the files are contained in a sub folder called 'UCI HAR Dataset' and stored in a manner identical to the folder made available for for the project.  The folder must be a peer of this project directory,
+It assumes the files are contained in a sub folder called 'UCI HAR Dataset' and stored in a manner identical to the folder made available for for the project.  The folder must be a peer of this project directory.
 
 It creates the following data frames which are needed to perform the subsequent merge:
 1. dTest: contains the content of 'X_test.txt' (the test observations)
