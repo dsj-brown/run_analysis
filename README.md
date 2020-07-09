@@ -27,14 +27,14 @@ The steps followed to populate each data set are as follows:
 2. Add activity labels to dTrain.
 3. Join data frames dTest and dTrain. Call it dAllData.
 4. Create a list of field names made up of:
-        i) the name 'actId'; plus
-        ii) the contents of dLabels
+    i) the name 'actId'; plus
+    ii) the contents of dLabels
 5. Add the list of field names to dAllData.
 6. Rename fields in dActs to 'actId' and 'activityName'.
 7. Merge dActs with dAllData.
 8. Create a subset of field names which contain the following:
-        i) [Mm]ean; or
-        ii) std
+    i) [Mm]ean; or
+    ii) std
 9. Create a list made up of 'activityName' and the subset of fields derived under step 8.
 10. Select the fields in dAllData using the combined field list from step 9.  Assign to object dSelData.
 11. Assign the value of dSelData to a global variable: dCombine.
