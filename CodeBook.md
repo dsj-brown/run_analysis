@@ -45,7 +45,7 @@ Mode                      |    "test"
 ### activityName
 Describes the activity being undertaken by the subject when the observations were recorded.
 
-Feature                        Result
+Feature                   |    Result
 ------------------------- | ---------
 Variable type             | character
 Number of missing obs.    |   0 (0 %)
