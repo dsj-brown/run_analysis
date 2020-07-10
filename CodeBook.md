@@ -22,14 +22,15 @@ Number of variables     |       7
 Variable                   | Class     | # unique | Missing | Description  
                            |           |          | values  |                      
 -------------------------- | --------- | -------- | ------- | ----------------
-**signalMeasure**          |character  |        86|   0.00 %| The name of the mean or standard deviation signal measure for which the mean has been derived for all subsequent variables.              
-**LAYING**                 |numeric    |        84|   0.00 %|   
-**SITTING**                |numeric    |        84|   0.00 %|                
-**STANDING**               |numeric    |        84|   0.00 %|                
-**WALKING**                |numeric    |        84|   0.00 %|                
-**WALKING\_DOWNSTAIRS**    |numeric    |        84|   0.00 %|                
-**WALKING\_UPSTAIRS**      |numeric    |        84|   0.00 %|                
+**signalMeasure**          | character |       86 |  0.00 % |               
+**LAYING**                 | numeric   |       84 |  0.00 % |   
+**SITTING**                | numeric   |       84 |  0.00 % |                
+**STANDING**               | numeric   |       84 |  0.00 % |                
+**WALKING**                | numeric   |       84 |  0.00 % |                
+**WALKING\_DOWNSTAIRS**    | numeric   |       84 |  0.00 % |                
+**WALKING\_UPSTAIRS**      | numeric   |       84 |  0.00 % |                
 
+The name of the mean or standard deviation signal measure for which the mean has been derived for all subsequent variables.
 
 ### Variable list
 #### signalMeasure
