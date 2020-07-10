@@ -1,56 +1,35 @@
----
-title: CodeBook for dTotals
-date: 2020-07-10 01:10:35
+# CodeBook for dTotals
 
-geometry: margin=2cm
-documentclass: article
-header-includes:
-  - \newcommand{\fullline}{\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}}
-  - \renewcommand\familydefault{\sfdefault}
-  - \newcommand{\bminione}{\begin{minipage}{0.75 \textwidth}}
-  - \newcommand{\bminitwo}{\begin{minipage}{0.25 \textwidth}}
-  - \newcommand{\emini}{\end{minipage}}
----
-
-### Data transformations
+## Data transformations
 
 The data contained in the data frame **dTotals**, as produced by the **run_analysis()** function, has been combined, merged, grouped and summarised, but no data cleansing has been necessary due to the high quality raw data.
 
 The README.md file explains the steps taken to transform the raw data.
 
-
-### Data report overview
+## Data report overview
 The dataset examined has the following dimensions:
 
----------------------------------
-Feature                    Result
------------------------- --------
-Number of observations         86
 
-Number of variables             7
----------------------------------
+Feature                 |  Result
+------------------------ --------
+Number of observations  |      86
+Number of variables     |       7
 
 
 ### Codebook summary table
 
---------------------------------------------------------------------------
-Variable                    Class         # unique  Missing  Description  
-                                                    values                        
+
+Variable                   |Class         # unique  Missing  Description  
+                           |                        values                        
 --------------------------- ----------- ---------- --------- -------------
-**[signalMeasure]**         character           86  0.00 %   The name of the mean or standard deviation signal measure for which the mean has been derived for all subsequent variables.              
+**signalMeasure**          |character  |        86|   0.00 %|The name of the mean or standard deviation signal measure for which the mean has been derived for all subsequent variables.              
+**LAYING**                 |numeric    |        84|   0.00 %|   
+**SITTING**                |numeric    |        84|   0.00 %|                
+**STANDING**               |numeric    |        84|   0.00 %|                
+**WALKING**                |numeric    |        84|   0.00 %|                
+**WALKING\_DOWNSTAIRS**    |numeric    |        84|   0.00 %|                
+**WALKING\_UPSTAIRS**      |numeric    |        84|   0.00 %|                
 
-**[LAYING]**                numeric             84  0.00 %                
-
-**[SITTING]**               numeric             84  0.00 %                
-
-**[STANDING]**              numeric             84  0.00 %                
-
-**[WALKING]**               numeric             84  0.00 %                
-
-**[WALKING\_DOWNSTAIRS]**   numeric             84  0.00 %                
-
-**[WALKING\_UPSTAIRS]**     numeric             84  0.00 %                
---------------------------------------------------------------------------
 
 ### Variable list
 #### signalMeasure
