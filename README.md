@@ -33,11 +33,13 @@ It assumes the files are contained in a sub folder called 'UCI HAR Dataset' and 
 
 It creates the following data frames which are needed to perform the subsequent merge:
 1. dTest: contains the content of 'X_test.txt' (the test observations)
-2. aTrain: contains the content of 'y_test.txt' (the activity ids for each observation in X_test.txt) 
-3. dTrain: contains the content of 'X_train.txt'
-4. aTrain: contains the content of 'y_train.txt' (the activity ids for each observation in X_train.txt) 
-5. dLabels: contains the contents of 'features.txt' (the field names for the test and train datasets)
-6. dActs: contains the contents of 'activity_labels.txt' (the descriptive labels for each unique activity id presented in y_test.txt and y_train.txt)
+2. aTest: contains the content of 'y_test.txt' (the activity ids for each observation in X_test.txt) 
+3. aTestSub: contains the content of 'subject_test.txt' (the subject ids for each observation in X_test.txt)
+4. dTrain: contains the content of 'X_train.txt' (the train observations)
+5. aTrain: contains the content of 'y_train.txt' (the activity ids for each observation in X_train.txt) 
+6. aTrainSub: contains the content of 'subject_train.txt' (the subject ids for each observation in X_train.txt)
+7. dLabels: contains the contents of 'features.txt' (the field names for the test and train datasets)
+8. dActs: contains the contents of 'activity_labels.txt' (the descriptive labels for each unique activity id presented in y_test.txt and y_train.txt)
 
 ### mergeData()
 A function which produces the data frame: dCombine.
