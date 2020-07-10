@@ -50,9 +50,9 @@ The steps followed to populate the data set are as follows:
 2. Add subject and activity labels to dTrain.
 3. Join data frames dTest and dTrain. Assign to object: dAllData.
 4. Create a list of field names(assigned to object: vNames) made up of:
+    + the name 'subject'
     + the name 'actId'; plus
     + the contents of dLabels
-    + the name 'subject'
 5. Apply list of field names to dAllData.
 6. Rename fields in dActs to 'actId' and 'activityName'.
 7. Merge dActs with dAllData.
