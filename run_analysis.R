@@ -48,32 +48,34 @@ importData <- function() {
         # Drop down into the folder containing the datasets
         setwd("./UCI HAR Dataset")
         
-        # Read in the test dataset and assign to an object 
-        # in the global environment
+        # Read in the test dataset
         dTest <<- read.table("test/X_test.txt", header = FALSE, dec = ".", 
                             comment.char = "", colClasses = "numeric")
 
-        # Read in the test activity labels and assign to an object 
-        # in the global environment        
+        # Read in the test activity labels       
         aTest <<- read.table("test/y_test.txt", header = FALSE, 
                              comment.char = "")
         
-        # Read in the train dataset and assign to an object 
-        # in the global environment        
+        # Read in the test subject labels       
+        aTestSub <<- read.table("test/subject_test.txt", header = FALSE, 
+                             comment.char = "")
+        
+        # Read in the train dataset      
         dTrain <<- read.table("train/X_train.txt", header = FALSE, dec = ".", 
                             comment.char = "", colClasses = "numeric")
         
-        # Read in the train activity labels and assign to an object 
-        # in the global environment
+        # Read in the train activity labels
         aTrain <<- read.table("train/y_train.txt", header = FALSE, 
                               comment.char = "")
         
-        # Read in the variable labels and assign to an object 
-        # in the global environment
+        # Read in the train subject labels      
+        aTrainSub <<- read.table("train/subject_train.txt", header = FALSE, 
+                             comment.char = "")
+        
+        # Read in the variable labels
         dLabels <<- read.table("features.txt", header = FALSE, comment.char = "")
 
-        # Read in the activity names and assign to an object 
-        # in the global environment
+        # Read in the activity names
         dActs <<- read.table("activity_labels.txt", header = FALSE, comment.char = "")
         
         # Revert working directory to the project folder
@@ -95,19 +97,15 @@ mergeData <- function() {
         oldw <- getOption("warn")
         options(warn = -1)
         
-        # Add subject fields
-        dTest$subject <- "test"
-        dTrain$subject <- "train"
-        
-        # Incorporate the activity labels
-        dTest <- cbind(aTest, dTest)
-        dTrain <- cbind(aTrain, dTrain)
+        # Incorporate the subject and activity labels
+        dTest <- cbind(aTestSub, aTest, dTest)
+        dTrain <- cbind(aTrainSub, aTrain, dTrain)
         
         ## Join the two tables
         dAllData <- rbind(dTest, dTrain)
         
         ## Combine a list of field labels and add to combined dataset
-        vNames <- c("actId", dLabels[, 2], "subject")
+        vNames <- c("subject", "actId", dLabels[, 2])
         names(dAllData) = vNames
         
         # Prepare the activity labels
@@ -132,11 +130,13 @@ mergeData <- function() {
         
         # Tidy up the global objects that were used in this function
         rm(dTest, envir = .GlobalEnv)
-        rm(dTrain, envir = .GlobalEnv)      
+        rm(dTrain, envir = .GlobalEnv)
         rm(dLabels, envir = .GlobalEnv)
         rm(dActs, envir = .GlobalEnv)
         rm(aTest, envir = .GlobalEnv)
+        rm(aTestSub, envir = .GlobalEnv)
         rm(aTrain, envir = .GlobalEnv)
+        rm(aTrainSub, envir = .GlobalEnv)
 
         # Turn warnings back on
         options(warn = oldw)

@@ -13,7 +13,7 @@ The dataset examined has the following dimensions:
 
 Feature                 |  Result
 ----------------------- | -------
-Number of observations  |    1032
+Number of observations  |   15480
 Number of variables     |       4
 
 
@@ -21,28 +21,29 @@ Number of variables     |       4
 
 Variable              | Class       |   # unique | Missing values
 --------------------- | ----------- | ---------- | --------------
-**subject**           | character   |          2 |         0.00 %
-**activityName**      | character   |          6 |         0.00 %
-**signalMeasure**     | character   |         86 |         0.00 %
-**value**             | numeric     |       1008 |         0.00 %
+**subject**           | integer     |         30 |         0.00 %                
+**activityName**      | character   |          6 |         0.00 %                
+**signalMeasure**     | character   |         86 |         0.00 %                
+**value**             | numeric     |      15120 |         0.00 % 
 
 
 ## Variable list
 
 ### subject
 
-Describes the source dataset from which the associated observations were taken.
-  + test = 'X_test.txt'
-  + train = 'X_train.txt'
+Provides an id relating to the subject to whom the associated observations relate.
 
 Feature                   | Result
-------------------------- | ---------
-Variable type             | character
-Number of missing obs.    |   0 (0 %)
-Number of unique values   |         2
-Mode                      |    "test"
+------------------------- | -------
+Variable type             | integer
+Number of missing obs.    | 0 (0 %)
+Number of unique values   |      30
+Median                    |    15.5
+1st and 3rd quartiles     |   8; 23
+Min. and max.             |   1; 30
 
 ### activityName
+
 Describes the activity being undertaken by the subject when the observations were recorded.
 
 Feature                   |    Result
@@ -53,6 +54,7 @@ Number of unique values   |         6
 Mode                      |  "LAYING"
 
 ### signalMeasure
+
 Describes the the specific time and frequency domain variable that was measured.
 Only the variables which presented a mean or standard deviation have been included in this dataset.
 
@@ -64,17 +66,19 @@ Number of unique values   |                                     86
 Mode                      | "angle(tBodyAccJerkMean),gravityMean)"
 
 ### value
+
 Is the summarised mean of all signalMeasure values for the indicated subject and activityName group.
 
 Feature                   |       Result
 ------------------------- | ------------
 Variable type             |      numeric
 Number of missing obs.    |      0 (0 %)
-Number of unique values   |         1008
-Median                    |         -0.3
-1st and 3rd quartiles     | -0.95; -0.02
-Min. and max.             |  -0.99; 0.94
+Number of unique values   |        15120
+Median                    |        -0.29
+1st and 3rd quartiles     | -0.94; -0.02
+Min. and max.             |     -1; 0.97
 
 
 Report generation information:
-*  Report creation time: Fri Jul 10 2020 10:03:47
+
+*  Report creation time: Fri Jul 10 2020 11:37:47

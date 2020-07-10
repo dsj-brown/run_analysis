@@ -46,29 +46,27 @@ A complete data set of labelled observations, containing only those variables wh
 
 The steps followed to populate the data set are as follows:
 
-1. Add subject field to dTest.
-2. Add subject field to dTrain. 
-3. Add activity labels to dTest.
-4. Add activity labels to dTrain.
-5. Join data frames dTest and dTrain. Assign to object: dAllData.
-6. Create a list of field names(assigned to object: vNames) made up of:
+1. Add subject and activity labels to dTest.
+2. Add subject and activity labels to dTrain.
+3. Join data frames dTest and dTrain. Assign to object: dAllData.
+4. Create a list of field names(assigned to object: vNames) made up of:
     + the name 'actId'; plus
     + the contents of dLabels
     + the name 'subject'
-7. Apply list of field names to dAllData.
-8. Rename fields in dActs to 'actId' and 'activityName'.
-9. Merge dActs with dAllData.
-10. Create a subset of field names (assign to object: fList) which contains the following:
+5. Apply list of field names to dAllData.
+6. Rename fields in dActs to 'actId' and 'activityName'.
+7. Merge dActs with dAllData.
+8. Create a subset of field names (assign to object: fList) which contains the following:
     + [Mm]ean; or
     + std
-11. Extend fList to include 'subject', 'activityName' and the subset of fields derived under step 10.
-12. Select the required fields from dAllData using the combined field list from step 11.  Assign to object: dSelData.
-13. Tidy dSelData, coercing variable names into a new field 'signalMeasure', and the observation value into a new field 'value'.  Assign to object: tallData.
-14. Assign the value of tallData to a global object: **dCombine**
-15. Delete all objects used in this sequence from the global environment.
+9. Extend fList to include 'subject', 'activityName' and the subset of fields derived under step 8.
+10. Select the required fields from dAllData using the combined field list from step 9.  Assign to object: dSelData.
+11. Tidy dSelData, coercing variable names into a new field 'signalMeasure', and the observation value into a new field 'value'.  Assign to object: tallData.
+12. Assign the value of tallData to a global object: **dCombine**
+13. Delete all objects used in this sequence from the global environment.
 
 ### totalData()
-A data set containing the average of each variable for each activity and each subject.
+A data set containing the average of each signalMeasure per subject and activity group.
 
 The steps followed to populate the data set are as follows:
 1. Group dCombine by subject, activityName and signalMeasure.  Assign to object: grpData
