@@ -17,7 +17,7 @@ Please ensure the following libraries are loaded before running:
 ## Scripts
 
 ### run_analysis(writeFile = FALSE)
-A function which executes a series of nested functions and results in a tidy data set being returned to the global environment.
+A function which executes a series of nested functions and results in a tidy data set being returned to the global environment: **dTotals**
 
 If you would like to write the contents of the data set into a .txt file, contained in the project folder, then specify the argument writeFile = TRUE when executing the function. 
 
