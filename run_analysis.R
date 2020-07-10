@@ -6,14 +6,14 @@
 ## 3. totalData()
 ## The product of which is a tidy data set called dTotals
 ##
+## Pass argument writeFile = TRUE if you'd like to generate a
+## .txt file containing the contents of the data set
+##
 ## PRE-REQUISITES:
 ## 1. Folder 'UCI HAR Dataset' must be a peer of the project folder
 ## 2. Please ensure the following libraries are loaded:
 ##      library(data.table)
 ##      library(dplyr)
-##
-## Pass argument writeFile = TRUE if you'd like to generate a
-## .txt file containing the contents of the data set
 ## -------------------------------------------------------------
 
 run_analysis <- function(writeFile = FALSE){
