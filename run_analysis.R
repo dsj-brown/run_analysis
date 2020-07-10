@@ -157,7 +157,7 @@ totalData <- function(){
         
         # Group and summarize the dCombine dataset by subject and activityName
         grpData <- dCombine %>% 
-                group_by(subject, activityName) %>%
+                group_by(subject, activityName, signalMeasure) %>%
                 summarise(value = mean(value))
 
         # Assign the result to a global variable
