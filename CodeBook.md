@@ -13,100 +13,68 @@ The dataset examined has the following dimensions:
 
 Feature                 |  Result
 ----------------------- | -------
-Number of observations  |      86
-Number of variables     |       7
+Number of observations  |    1032
+Number of variables     |       4
 
 
 ## Codebook summary table
 
-Variable                   | Class     | # unique | Missing values
--------------------------- | --------- | -------- | --------------
-**signalMeasure**          | character |       86 |         0.00 %
-**LAYING**                 | numeric   |       84 |         0.00 %
-**SITTING**                | numeric   |       84 |         0.00 %
-**STANDING**               | numeric   |       84 |         0.00 %
-**WALKING**                | numeric   |       84 |         0.00 %
-**WALKING\_DOWNSTAIRS**    | numeric   |       84 |         0.00 %
-**WALKING\_UPSTAIRS**      | numeric   |       84 |         0.00 %
+Variable              | Class       |   # unique | Missing values
+--------------------- | ----------- | ---------- | --------------
+**subject**           | character   |          2 |         0.00 %
+**activityName**      | character   |          6 |         0.00 %
+**signalMeasure**     | character   |         86 |         0.00 %
+**value**             | numeric     |       1008 |         0.00 %
 
 
 ## Variable list
 
+### subject
+
+Describes the source dataset from which the associated observations were taken.
+  + test = 'X_test.txt'
+  + train = 'X_train.txt'
+
+Feature                   | Result
+------------------------- | ---------
+Variable type             | character
+Number of missing obs.    |   0 (0 %)
+Number of unique values   |         2
+Mode                      |    "test"
+
+### activityName
+Describes the activity being undertaken by the subject when the observations were recorded.
+
+Feature                        Result
+------------------------- | ---------
+Variable type             | character
+Number of missing obs.    |   0 (0 %)
+Number of unique values   |         6
+Mode                      |  "LAYING"
+
 ### signalMeasure
+Describes the the specific time and frequency domain variable that was measured.
+Only the variables which presented a mean or standard deviation have been included in this dataset.
 
-* The variable is a key (distinct values for each observation).
-* The name of the mean or standard deviation signal measure for which the mean has been derived for all activity variables (LAYING, SITTING etc).
-* Example signal measures are:
-    + tBodyAcc-mean()-X
-    + tBodyAcc-std()-X
-* These values were presented as variables in the original data set, but have been transposed to be presented as observations here, with the six activities being presented as variables.
+Feature                   |                                 Result
+------------------------- | --------------------------------------
+Variable type             |                              character
+Number of missing obs.    |                                0 (0 %)
+Number of unique values   |                                     86
+Mode                      | "angle(tBodyAccJerkMean),gravityMean)"
 
-### LAYING
+### value
+Is the summarised mean of all signalMeasure values for the indicated subject and activityName group.
 
-Feature                   |        Result
-------------------------- | -------------
-Variable type             |       numeric
-Number of missing obs.    |       0 (0 %)
-Number of unique values   |            84
-Median                    |         -0.94
-1st and 3rd quartiles     |  -0.97; -0.02
-Min. and max.             |   -0.98; 0.62
-
-### SITTING
-
-Feature                   |        Result
-------------------------- | -------------
-Variable type             |       numeric
-Number of missing obs.    |       0 (0 %)
-Number of unique values   |            84
-Median                    |         -0.95
-1st and 3rd quartiles     |  -0.98; -0.02
-Min. and max.             |   -0.99; 0.88
-
-### STANDING
-
-Feature                   |        Result
-------------------------- | -------------
-Variable type             |       numeric
-Number of missing obs.    |       0 (0 %)
-Number of unique values   |            84
-Median                    |         -0.94
-1st and 3rd quartiles     |  -0.97; -0.03
-Min. and max.             |   -0.99; 0.94
-
-### WALKING
-
-Feature                   |        Result
-------------------------- | -------------
-Variable type             |       numeric
-Number of missing obs.    |       0 (0 %)
-Number of unique values   |            84
-Median                    |         -0.25
-1st and 3rd quartiles     |  -0.37; -0.04
-Min. and max.             |   -0.98; 0.93
-
-### WALKING\_DOWNSTAIRS
-
-Feature                   |        Result
-------------------------- | -------------
-Variable type             |       numeric
-Number of missing obs.    |       0 (0 %)
-Number of unique values   |            84
-Median                    |         -0.08
-1st and 3rd quartiles     |   -0.32; 0.02
-Min. and max.             |   -0.95; 0.93
-
-### WALKING\_UPSTAIRS
-
-Feature                   |        Result
-------------------------- | -------------
-Variable type             |       numeric
-Number of missing obs.    |       0 (0 %)
-Number of unique values   |            84
-Median                    |         -0.29
-1st and 3rd quartiles     |   -0.42; -0.1
-Min. and max.             |   -0.95; 0.88
+Feature                   |       Result
+------------------------- | ------------
+Variable type             |      numeric
+Number of missing obs.    |      0 (0 %)
+Number of unique values   |         1008
+Median                    |         -0.3
+1st and 3rd quartiles     | -0.95; -0.02
+Min. and max.             |  -0.99; 0.94
 
 
 Report generation information:
-* Report creation time: Fri Jul 10 2020 01:10:36
+*  Report creation time: Fri Jul 10 2020 10:03:47
