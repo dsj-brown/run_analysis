@@ -34,6 +34,10 @@ Variable                   | Class     | # unique | Missing values
 
 * The variable is a key (distinct values for each observation).
 * The name of the mean or standard deviation signal measure for which the mean has been derived for all activity variables (LAYING, SITTING etc).
+* Example signal measures are:
+    + tBodyAcc-mean()-X
+    + tBodyAcc-std()-X
+* The dataset has been transposed so it is tall and thin as opposed to short and fat.
 
 ### LAYING
 
