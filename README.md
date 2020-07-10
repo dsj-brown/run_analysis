@@ -17,6 +17,7 @@ Please ensure the following libraries are loaded before running:
 
 ### run_analysis(writeFile = FALSE)
 A function which executes a series of nested functions and results in a tidy data set being returned to the global environment.
+
 If you would like to write the contents of the data set into a .txt file, contained in the project folder, then specify the argument writeFile = TRUE when executing the function. 
 
 The function calls the following functions in order:
@@ -25,7 +26,8 @@ The function calls the following functions in order:
 3. totalData()
 
 ### importData()
-A function to import the assignment data files.  
+A function to import the assignment data files.
+
 It assumes the files are contained in a sub folder called 'UCI HAR Dataset' and stored in a manner identical to the folder made available for for the project.  The folder must be a peer of this project directory.
 
 It creates the following data frames which are needed to perform the subsequent merge:
