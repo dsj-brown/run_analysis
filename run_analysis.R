@@ -1,3 +1,8 @@
+# Load the dependent libraries
+library(data.table)
+library(dplyr)
+library(tidyr)
+
 ## -------------------------------------------------------------
 ## FUNCTION: run_analysis()
 ## Function which runs the following scripts, outlined below
@@ -14,6 +19,7 @@
 ## 2. Please ensure the following libraries are loaded:
 ##      library(data.table)
 ##      library(dplyr)
+##      library(tidyr)
 ## -------------------------------------------------------------
 
 run_analysis <- function(writeFile = FALSE){
@@ -79,7 +85,8 @@ importData <- function() {
 ## FUNCTION: mergeData()
 ## Function to merge the training and test sets 
 ## to create one data set
-## Ensure the dplyr library has been loaded before executing
+## Ensure the tidyr and dplyr libraries have been loaded before 
+## executing
 ## -------------------------------------------------------------
 
 mergeData <- function() {
@@ -87,6 +94,10 @@ mergeData <- function() {
         # Turn off warnings
         oldw <- getOption("warn")
         options(warn = -1)
+        
+        # Add subject fields
+        dTest$subject <- "test"
+        dTrain$subject <- "train"
         
         # Incorporate the activity labels
         dTest <- cbind(aTest, dTest)
@@ -96,7 +107,7 @@ mergeData <- function() {
         dAllData <- rbind(dTest, dTrain)
         
         ## Combine a list of field labels and add to combined dataset
-        vNames <- c("actId", dLabels[ ,2])
+        vNames <- c("actId", dLabels[, 2], "subject")
         names(dAllData) = vNames
         
         # Prepare the activity labels
@@ -107,13 +118,17 @@ mergeData <- function() {
         
         # Define the subset of field names that we care about
         fList <- grep("[Mm]ean|std", names(dAllData), value = TRUE)
-        fList <- c("activityName", fList)
+        fList <- c("subject", "activityName", fList)
         
         # Then select only the fields that we need
         dSelData <- select(dAllData, fList)
         
+        # Tidy the data
+        dTallData <- gather(dSelData, "signalMeasure", "value", 
+                            -subject, -activityName)
+        
         ## Return the results to the global environment 
-        dCombine <<- dSelData
+        dCombine <<- dTallData
         
         # Tidy up the global objects that were used in this function
         rm(dTest, envir = .GlobalEnv)
@@ -140,27 +155,13 @@ mergeData <- function() {
 
 totalData <- function(){
         
-        # Group the dCombine dataset by activityName
+        # Group and summarize the dCombine dataset by subject and activityName
         grpData <- dCombine %>% 
-                group_by(activityName)
-        
-        # Get a data frame containing the mean per group
-        meanData <- aggregate(grpData[,2:ncol(grpData)], 
-                              list(grpData$activityName), mean)
-        
-        # Flip so it's tall and thin as opposed to short and fat
-        tallData <- data.frame(t(meanData[-1]))
-        colnames(tallData) <- meanData[, 1]
-        
-        # Convert row labels to row names
-        tallData <- setDT(tallData, keep.rownames = TRUE)[]
-        
-        # and add a descriptive column name
-        tallData <- tallData %>%
-                        rename(signalMeasure = rn)
-        
+                group_by(subject, activityName) %>%
+                summarise(value = mean(value))
+
         # Assign the result to a global variable
-        dTotals <<- tallData
+        dTotals <<- grpData
         
         # Dispose of the dCombine data frame
         rm(dCombine, envir = .GlobalEnv)
