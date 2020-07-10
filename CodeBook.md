@@ -19,9 +19,9 @@ Number of variables     |       7
 ### Codebook summary table
 
 
-Variable                   |Class      | # unique | Missing | Description  
+Variable                   | Class     | # unique | Missing | Description  
                            |           |          | values  |                      
--------------------------- | --------- | -------- | ------- | -------------
+-------------------------- | --------- | -------- | ------- | ----------------
 **signalMeasure**          |character  |        86|   0.00 %| The name of the mean or standard deviation signal measure for which the mean has been derived for all subsequent variables.              
 **LAYING**                 |numeric    |        84|   0.00 %|   
 **SITTING**                |numeric    |        84|   0.00 %|                
