@@ -4,7 +4,9 @@
 
 The data contained in the data frame **dTotals**, as produced by the **run_analysis()** function, has been combined, merged, grouped and summarised, but no data cleansing has been necessary due to the high quality of the raw data.
 
-The README.md file explains the steps taken to transform the raw data.
+The dataset has been transposed so it is tall and thin as opposed to short and fat.
+
+The README.md file explains all the steps taken to transform the raw data.
 
 ## Data report overview
 The dataset examined has the following dimensions:
@@ -37,7 +39,7 @@ Variable                   | Class     | # unique | Missing values
 * Example signal measures are:
     + tBodyAcc-mean()-X
     + tBodyAcc-std()-X
-* The dataset has been transposed so it is tall and thin as opposed to short and fat.
+* These values were presented as variables in the original data set, but have been transposed to be presented as observations here, with the six activities being presented as variables.
 
 ### LAYING
 
